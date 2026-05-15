@@ -4,7 +4,7 @@ import { z } from "zod";
 const envSchema = z.object({
   PORT: z.coerce.number().int().positive().default(3001),
   FIREBASE_PROJECT_ID: z.string().min(1).optional(),
-  FIREBASE_CLIENT_EMAIL: z.string().email().optional(),
+  FIREBASE_CLIENT_EMAIL: z.string().min(1).optional(),
   FIREBASE_PRIVATE_KEY: z.string().min(1).optional(),
   FIREBASE_SERVICE_ACCOUNT_PATH: z.string().min(1).optional(),
   FIREBASE_STORAGE_BUCKET: z.string().min(1).optional(),
@@ -16,16 +16,18 @@ const envSchema = z.object({
 });
 
 const parsed = envSchema.safeParse(process.env);
+const envData = parsed.success ? parsed.data : envSchema.parse({});
 
 if (!parsed.success) {
-  throw new Error(`Invalid environment variables: ${parsed.error.message}`);
+  // Never crash the serverless runtime because of malformed optional env values.
+  console.error("Invalid environment variables detected. Falling back to safe defaults.", parsed.error.flatten());
 }
 
 const hasFirebaseAdminConfig = Boolean(
-  parsed.data.FIREBASE_PROJECT_ID && parsed.data.FIREBASE_CLIENT_EMAIL && parsed.data.FIREBASE_PRIVATE_KEY,
+  envData.FIREBASE_PROJECT_ID && envData.FIREBASE_CLIENT_EMAIL && envData.FIREBASE_PRIVATE_KEY,
 );
 const hasCloudinaryConfig = Boolean(
-  parsed.data.CLOUDINARY_CLOUD_NAME && parsed.data.CLOUDINARY_API_KEY && parsed.data.CLOUDINARY_API_SECRET,
+  envData.CLOUDINARY_CLOUD_NAME && envData.CLOUDINARY_API_KEY && envData.CLOUDINARY_API_SECRET,
 );
 
 const fallbackOrigins = [
@@ -36,12 +38,12 @@ const fallbackOrigins = [
   "https://sacred-spaces-app.vercel.app",
 ];
 
-const configuredOrigins = parsed.data.CORS_ORIGINS
-  ? parsed.data.CORS_ORIGINS.split(",").map((origin) => origin.trim()).filter(Boolean)
+const configuredOrigins = envData.CORS_ORIGINS
+  ? envData.CORS_ORIGINS.split(",").map((origin) => origin.trim()).filter(Boolean)
   : fallbackOrigins;
 
 export const env = {
-  ...parsed.data,
+  ...envData,
   CORS_ORIGINS: configuredOrigins,
   hasFirebaseAdminConfig,
   hasCloudinaryConfig,
