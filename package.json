@@ -1,0 +1,35 @@
+{
+  "name": "sacred-spaces-server",
+  "version": "1.0.0",
+  "description": "Express server for Sacred Spaces App",
+  "type": "module",
+  "main": "dist/index.js",
+  "scripts": {
+    "dev": "nodemon --exec 'node --no-warnings ./node_modules/.bin/tsx' src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "seed:members": "tsx src/scripts/seedMembers.ts",
+    "seed:programs": "tsx src/scripts/seedPrograms.ts",
+    "seed:departments": "tsx src/scripts/seedDepartments.ts",
+    "seed:herobanners": "tsx src/scripts/seedHeroBanners.ts"
+  },
+  "dependencies": {
+    "@types/multer": "^2.1.0",
+    "cloudinary": "^2.10.0",
+    "cors": "^2.8.5",
+    "dotenv": "^17.4.2",
+    "express": "^4.18.2",
+    "firebase-admin": "^13.9.0",
+    "multer": "^2.1.1",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.19",
+    "@types/express": "^4.17.21",
+    "@types/node": "^20.10.6",
+    "nodemon": "^3.0.2",
+    "ts-node": "^10.9.2",
+    "tsx": "^4.21.0",
+    "typescript": "^5.3.3"
+  }
+}
