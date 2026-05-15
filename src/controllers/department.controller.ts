@@ -1,12 +1,12 @@
 import { Request, Response } from "express";
-import { db, firebaseInitError, firebaseReady } from "../config/firebaseAdmin";
+import { db, firebaseInitError, firebaseReady } from "../config/firebaseAdmin.js";
 import {
   addDepartmentMemberSchema,
   createDepartmentSchema,
   suspendDepartmentMemberSchema,
   type DepartmentMemberRecord,
   type DepartmentRecord,
-} from "../schemas/department.schema";
+} from "../schemas/department.schema.js";
 
 const DEPARTMENTS_COLLECTION = "departments";
 const MEMBERS_COLLECTION = "members";

@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { addHeroBanner, fetchHeroBanners, patchHeroBanner } from "../controllers/herobanner.controller";
+import { addHeroBanner, fetchHeroBanners, patchHeroBanner } from "../controllers/herobanner.controller.js";
 
 export const heroBannerRouter = Router();
 

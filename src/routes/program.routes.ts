@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { addProgram, deleteProgram, fetchPrograms, patchProgram } from "../controllers/program.controller";
+import { addProgram, deleteProgram, fetchPrograms, patchProgram } from "../controllers/program.controller.js";
 
 export const programRouter = Router();
 

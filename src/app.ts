@@ -1,12 +1,12 @@
 import express, { Express, Request, Response } from "express";
 import cors from "cors";
-import { env } from "./config/env";
-import { departmentRouter } from "./routes/department.routes";
-import { heroBannerRouter } from "./routes/herobanner.routes";
-import { mediaRouter } from "./routes/media.routes";
-import { memberRouter } from "./routes/member.routes";
-import { programRouter } from "./routes/program.routes";
-import { statsRouter } from "./routes/stats.routes";
+import { env } from "./config/env.js";
+import { departmentRouter } from "./routes/department.routes.js";
+import { heroBannerRouter } from "./routes/herobanner.routes.js";
+import { mediaRouter } from "./routes/media.routes.js";
+import { memberRouter } from "./routes/member.routes.js";
+import { programRouter } from "./routes/program.routes.js";
+import { statsRouter } from "./routes/stats.routes.js";
 
 export const app: Express = express();
 const START_TIME = new Date();

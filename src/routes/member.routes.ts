@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { addMember, deleteMember, fetchMembers } from "../controllers/member.controller";
+import { addMember, deleteMember, fetchMembers } from "../controllers/member.controller.js";
 
 export const memberRouter = Router();
 

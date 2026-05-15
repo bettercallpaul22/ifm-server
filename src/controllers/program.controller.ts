@@ -1,11 +1,11 @@
 import { Request, Response } from "express";
-import { db, firebaseInitError, firebaseReady } from "../config/firebaseAdmin";
+import { db, firebaseInitError, firebaseReady } from "../config/firebaseAdmin.js";
 import {
   programPatchSchema,
   programSchema,
   type ProgramPatchInput,
   type ProgramRecord,
-} from "../schemas/program.schema";
+} from "../schemas/program.schema.js";
 
 const COLLECTION = "programs";
 

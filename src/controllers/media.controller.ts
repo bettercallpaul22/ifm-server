@@ -1,9 +1,9 @@
 import { Request, Response } from "express";
 import { type UploadApiResponse } from "cloudinary";
-import { cloudinary, cloudinaryInitError, cloudinaryReady } from "../config/cloudinary";
-import { db, firebaseInitError, firebaseReady } from "../config/firebaseAdmin";
-import { env } from "../config/env";
-import { type MediaRecord, type MediaType } from "../schemas/media.schema";
+import { cloudinary, cloudinaryInitError, cloudinaryReady } from "../config/cloudinary.js";
+import { db, firebaseInitError, firebaseReady } from "../config/firebaseAdmin.js";
+import { env } from "../config/env.js";
+import { type MediaRecord, type MediaType } from "../schemas/media.schema.js";
 
 const COLLECTION = "media";
 

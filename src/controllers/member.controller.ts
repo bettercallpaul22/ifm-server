@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
-import { db, firebaseInitError, firebaseReady } from "../config/firebaseAdmin";
-import { memberSchema, type MemberRecord } from "../schemas/member.schema";
+import { db, firebaseInitError, firebaseReady } from "../config/firebaseAdmin.js";
+import { memberSchema, type MemberRecord } from "../schemas/member.schema.js";
 
 const COLLECTION = "members";
 

@@ -6,7 +6,7 @@ import {
   fetchDepartments,
   removeDepartmentMember,
   suspendDepartmentMember,
-} from "../controllers/department.controller";
+} from "../controllers/department.controller.js";
 
 export const departmentRouter = Router();
 

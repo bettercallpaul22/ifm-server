@@ -1,4 +1,4 @@
-import { db, firebaseInitError, firebaseReady } from "../config/firebaseAdmin";
+import { db, firebaseInitError, firebaseReady } from "../config/firebaseAdmin.js";
 
 type SeedDepartment = {
   id: string;

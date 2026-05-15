@@ -1,11 +1,11 @@
 import { Request, Response } from "express";
-import { db, firebaseInitError, firebaseReady } from "../config/firebaseAdmin";
+import { db, firebaseInitError, firebaseReady } from "../config/firebaseAdmin.js";
 import {
   heroBannerPatchSchema,
   heroBannerSchema,
   type HeroBannerPatchInput,
   type HeroBannerRecord,
-} from "../schemas/herobanner.schema";
+} from "../schemas/herobanner.schema.js";
 
 const COLLECTION = "heroBanners";
 
