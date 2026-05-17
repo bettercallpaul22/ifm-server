@@ -1,8 +1,5 @@
 import { cert, getApps, initializeApp } from "firebase-admin/app";
 import { getFirestore, type Firestore } from "firebase-admin/firestore";
-import { existsSync, readFileSync } from "node:fs";
-import { resolve } from "node:path";
-import { fileURLToPath } from "node:url";
 import { env } from "./env.js";
 
 type FirebaseAdminCredentials = {
@@ -50,43 +47,10 @@ function getCredentialsFromEnv(): FirebaseAdminCredentials | null {
   };
 }
 
-function getDefaultServiceAccountPath() {
-  return fileURLToPath(new URL("../../intimate_service_acc.json", import.meta.url));
-}
-
-function getCredentialsFromServiceAccountFile(): FirebaseAdminCredentials | null {
-  const candidatePath = env.FIREBASE_SERVICE_ACCOUNT_PATH
-    ? resolve(process.cwd(), env.FIREBASE_SERVICE_ACCOUNT_PATH)
-    : getDefaultServiceAccountPath();
-
-  if (!existsSync(candidatePath)) return null;
-
-  const raw = readFileSync(candidatePath, "utf8");
-  const parsed = JSON.parse(raw) as {
-    project_id?: string;
-    client_email?: string;
-    private_key?: string;
-    storage_bucket?: string;
-  };
-
-  if (!parsed.project_id || !parsed.client_email || !parsed.private_key) {
-    throw new Error(
-      `Service account file is missing one or more required fields at ${candidatePath}.`,
-    );
-  }
-
-  return {
-    projectId: parsed.project_id,
-    clientEmail: parsed.client_email,
-    privateKey: normalizePrivateKey(parsed.private_key),
-    storageBucket: env.FIREBASE_STORAGE_BUCKET || parsed.storage_bucket,
-  };
-}
-
 let firebaseCredentials: FirebaseAdminCredentials | null = null;
 
 try {
-  firebaseCredentials = getCredentialsFromEnv() ?? getCredentialsFromServiceAccountFile();
+  firebaseCredentials = getCredentialsFromEnv();
 } catch (error) {
   const reason = error instanceof Error ? error.message : "Unknown Firebase credential error";
   firebaseInitError = `Firebase credential loading failed: ${reason}`;

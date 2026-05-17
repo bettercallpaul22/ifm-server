@@ -6,7 +6,6 @@ const envSchema = z.object({
   FIREBASE_PROJECT_ID: z.string().min(1).optional(),
   FIREBASE_CLIENT_EMAIL: z.string().min(1).optional(),
   FIREBASE_PRIVATE_KEY: z.string().min(1).optional(),
-  FIREBASE_SERVICE_ACCOUNT_PATH: z.string().min(1).optional(),
   FIREBASE_STORAGE_BUCKET: z.string().min(1).optional(),
   CLOUDINARY_CLOUD_NAME: z.string().min(1).optional(),
   CLOUDINARY_API_KEY: z.string().min(1).optional(),
@@ -36,6 +35,8 @@ const fallbackOrigins = [
   "http://localhost:3000",
   "http://localhost:8082",
   "https://sacred-spaces-app.vercel.app",
+  "https://www.intimatefaithministry.org",
+  "https://intimatefaithministry.org"
 ];
 
 const configuredOrigins = envData.CORS_ORIGINS

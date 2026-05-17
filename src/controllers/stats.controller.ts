@@ -21,7 +21,7 @@ function ensureFirebaseConfigured(res: Response) {
 
   res.status(503).json({
     message:
-      "Firebase Admin is not ready. Provide FIREBASE_PROJECT_ID/FIREBASE_CLIENT_EMAIL/FIREBASE_PRIVATE_KEY in server/.env or place a valid service account file at server/intimate_service_acc.json.",
+      "Firebase Admin is not ready. Provide FIREBASE_PROJECT_ID/FIREBASE_CLIENT_EMAIL/FIREBASE_PRIVATE_KEY in server/.env.",
     details: firebaseInitError || "Missing Firebase Admin configuration.",
   });
   return false;
