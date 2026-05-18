@@ -39,13 +39,19 @@ const fallbackOrigins = [
   "https://intimatefaithministry.org"
 ];
 
+const normalizeOrigin = (origin: string) => origin.trim().replace(/\/+$/, "");
+
 const configuredOrigins = envData.CORS_ORIGINS
-  ? envData.CORS_ORIGINS.split(",").map((origin) => origin.trim()).filter(Boolean)
-  : fallbackOrigins;
+  ? envData.CORS_ORIGINS.split(",").map((origin) => normalizeOrigin(origin)).filter(Boolean)
+  : [];
+
+const mergedOrigins = Array.from(
+  new Set([...fallbackOrigins.map((origin) => normalizeOrigin(origin)), ...configuredOrigins]),
+);
 
 export const env = {
   ...envData,
-  CORS_ORIGINS: configuredOrigins,
+  CORS_ORIGINS: mergedOrigins,
   hasFirebaseAdminConfig,
   hasCloudinaryConfig,
 };
